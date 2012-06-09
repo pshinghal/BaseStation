@@ -1,0 +1,5 @@
+Commented thingyToSend declaration, ADDED IMPORTANT FLAGS TO MAKEFILE
+RadioSend RadioQueue[RadioOut] instead of msg
+Uncommented RadioPacket.clear()
+#Changed addr in uartsendtask
+Uncommented 180, 181

@@ -1,0 +1,15 @@
+COMPONENT=BaseStationC
+BUILD_EXTRA_DEPS += BaseStation.class
+CLEAN_EXTRA = *.class BaseStationMsg.java
+
+CFLAGS += -I$(TOSDIR)/lib/T2Hack
+
+BaseStation.class: $(wildcard *.java) BaseStationMsg.java
+	javac -target 1.4 -source 1.4 *.java
+
+BaseStationMsg.java:
+	mig java -target=telosb $(CFLAGS) -java-classname=BaseStationMsg BaseStation.h base_msg -o $@
+
+
+include $(MAKERULES)
+
