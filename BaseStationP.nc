@@ -50,6 +50,16 @@
 //BaseStation.h must define base_msg_t
 #include "BaseStation.h"
 
+enum BitPattern {
+	FLAT_ZERO = 0,
+	FLAT_ONE = 0 - 1,
+	ONES_32 = 4294967295, // 32 'ONE' BITS
+	ALTERNATE_1 = 6148914691236517205, // 01010101...
+	ALTERNATE_2 = 3689348814741910323, // 00110011...
+	ALTERNATE_3 = 17216961135462248174, // 11101110...
+	ALTERNATE_4 = 1085102592571150095 // 00001111...
+};
+
 //payloadType must be a struct containing exactly two members: num1 and num2
 typedef base_msg_t payloadType;
 
@@ -298,9 +308,10 @@ implementation
  
     tempThingy = (payloadType*) call UartPacket.getPayload(msg, sizeof(payloadType));
     //tempThingy->num1 = thingyToSend.num1;
-    tempThingy->num1 = 0;
+    tempThingy->num1 = FLAT_ONE;
     //tempThingy->num2 = thingyToSend.num2;
-    tempThingy->num2 = 0 - 1;
+    tempThingy->num2 = FLAT_ONE;
+    tempThingy->num3 = FLAT_ONE;
 
     //len = call UartPacket.payloadLength(msg);
     len = sizeof(payloadType);
